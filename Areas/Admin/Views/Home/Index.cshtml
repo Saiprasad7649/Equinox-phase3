@@ -1,0 +1,43 @@
+@model IEnumerable<Equinox.Models.Club>
+
+@{
+    ViewData["Title"] = "Manage Clubs";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New Club</a>
+</p>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered table-hover table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Club Name</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var club in Model)
+            {
+                <tr>
+                    <td>@club.Name</td>
+                    <td>@club.PhoneNumber</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@club.ClubId" class="btn btn-sm btn-outline-secondary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@club.ClubId" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info" role="alert">
+        No clubs available. Click "Add New Club" to create one.
+    </div>
+}
